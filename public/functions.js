@@ -3,12 +3,12 @@ function getData(data){
     myDate = data.myDate;
     myNumber = data.myNumber;
     
-    createRow();
+    createRow(checkRows);
     writeData(myDate, myNumber); 
     
 };
 
-function createRow(){
+function createRow(callback){
 
     row = document.createElement('tr');
     celDate = document.createElement('td');
@@ -19,7 +19,7 @@ function createRow(){
 
     tableRandomBody.appendChild(row);
 
-    checkRows();
+    callback();
 
 };
 
@@ -49,5 +49,37 @@ function checkRows(){
     if(rows.length>10){
         document.getElementsByTagName('tr')[1].remove();
     }
+
+}
+
+
+//Set my number
+function getRandomInt(min, max) {
+
+    randomNumber = formatNumber( Math.floor(Math.random() * (max - min)) + min );
+    return randomNumber;
+
+}
+
+function formatNumber(val){
+
+    var formattedNumber = ("0" + val).slice(-2);
+    return formattedNumber;
+
+}
+
+function setMyNumber(){
+
+    myNumber = document.getElementById('myNumber');
+    randomNumber = getRandomInt(0, 100);
+    myNumber.innerHTML = `My number is ${randomNumber}`;
+
+    myPromise = new Promise(resolve => {
+        setTimeout( () => {
+            if(randomNumber){resolve(true);}
+        }, 2000);
+    });
+
+    return myPromise;
 
 }
