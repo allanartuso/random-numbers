@@ -24,13 +24,6 @@ function createRow(callback){
 
 };
 
-function writeData(myDate, myNumber){
-
-    celDate.innerHTML = myDate;
-    celNumber.innerHTML = myNumber;
-
-};
-
 function checkRows(){
 
     rows = document.getElementsByTagName('tr');
@@ -49,8 +42,14 @@ function checkRows(){
         document.getElementsByTagName('tr')[1].remove();
     }
 
-}
+};
 
+function writeData(myDate, myNumber){
+
+    celDate.innerHTML = myDate;
+    celNumber.innerHTML = myNumber;
+
+};
 
 //Set my number
 function getRandomInt(min, max) {
@@ -58,31 +57,34 @@ function getRandomInt(min, max) {
     randomNumber = formatNumber( Math.floor(Math.random() * (max - min)) + min );
     return randomNumber;
 
-}
+};
 
 function formatNumber(val){
 
     var formattedNumber = ("0" + val).slice(-2);
     return formattedNumber;
 
-}
+};
 
 function setMyNumber(){
 
-    myNumber = document.getElementById('myNumber');
-
-    let promiseCreateNumber = new Promise(function(resolve){
-        randomNumber = getRandomInt(0,100); 
-        resolve(randomNumber);
+    var promiseCreateNumber = new Promise(createNumber);
+    
+    promiseCreateNumber.then(function(result){        
+        myNumber.innerHTML = `My number is ${result}`
     });
-    
-    promiseCreateNumber.then(                             
-        myNumber.innerHTML = `My number is ${randomNumber}`
-    );
+ 
+    return promiseCreateNumber;
+};
 
-    return randomNumber;
-    
-}
+function createNumber(resolve, reject){      
+            
+    setTimeout(function(){
+        randomNumber = getRandomInt(0,100);
+        resolve(randomNumber);
+    }, 500);            
+
+};
 
 function checkNumbers(myNumberIs,myNumber){
 
@@ -91,4 +93,4 @@ function checkNumbers(myNumberIs,myNumber){
         socket.disconnect();
     }
 
-}
+};

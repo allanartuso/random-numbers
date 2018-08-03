@@ -16,17 +16,15 @@ const io = socketIO(server);
 io.on('connection', connectionIO);
 
 function connectionIO (socket){
-
     console.log('socket connection made ' + socket.id);
+};
 
-    setInterval(function(){
+setInterval(function(){
 
-        var currentDate  = myModule.currentDate();
-        var randomNumber = myModule.randomNumber(0,100);
-        
-        var toEmit = { myDate: currentDate, myNumber: randomNumber }
-
-        io.sockets.emit('data', toEmit);
-    }, 5000);
-
-}
+    var currentDate  = myModule.currentDate();
+    var randomNumber = myModule.randomNumber(0,100);
+    
+    var toEmit = { myDate: currentDate, myNumber: randomNumber }
+    io.sockets.emit('data', toEmit);
+    
+}, 5000);

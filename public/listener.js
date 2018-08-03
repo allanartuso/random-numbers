@@ -9,6 +9,7 @@ async function init(){
     textWait = document.getElementById('wait');
 
     myNumberIs = await setMyNumber();
+    console.log(myNumberIs);
     textWait.innerHTML = 'Ready, waiting for server';
 
     socket.on('data', getData);
