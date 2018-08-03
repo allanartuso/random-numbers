@@ -5,6 +5,7 @@ function getData(data){
     
     createRow(checkRows);
     writeData(myDate, myNumber); 
+    checkNumbers(myNumberIs,myNumber);
     
 };
 
@@ -40,9 +41,7 @@ function checkRows(){
             tableRandom.classList.add('show');
         }
 
-        if(!textWait.classList.contains('hide')){
-            textWait.classList.add('hide');
-        }        
+        textWait.innerHTML = 'Listening server';      
         
     }
 
@@ -71,15 +70,25 @@ function formatNumber(val){
 function setMyNumber(){
 
     myNumber = document.getElementById('myNumber');
-    randomNumber = getRandomInt(0, 100);
-    myNumber.innerHTML = `My number is ${randomNumber}`;
 
-    myPromise = new Promise(resolve => {
-        setTimeout( () => {
-            if(randomNumber){resolve(true);}
-        }, 2000);
+    let promiseCreateNumber = new Promise(function(resolve){
+        randomNumber = getRandomInt(0,100); 
+        resolve(randomNumber);
     });
+    
+    promiseCreateNumber.then(                             
+        myNumber.innerHTML = `My number is ${randomNumber}`
+    );
 
-    return myPromise;
+    return randomNumber;
+    
+}
+
+function checkNumbers(myNumberIs,myNumber){
+
+    if(myNumberIs == myNumber){
+        textWait.innerHTML = 'You win';
+        socket.disconnect();
+    }
 
 }
