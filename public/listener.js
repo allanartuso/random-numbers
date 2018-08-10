@@ -4,11 +4,11 @@ var socket = io.connect('http://localhost:3000');
 
 async function init(){
     
-    tableRandom = document.getElementById('tableRandom');
-    tableRandomBody = document.querySelector('#tableRandom tbody');
-    textWait = document.getElementById('wait');
+    var tableRandom = document.getElementById('tableRandom');
+    var tableRandomBody = document.querySelector('#tableRandom tbody');
+    var textWait = document.getElementById('wait');
 
-    myNumberIs = await setMyNumber();
+    var myNumberIs = await setMyNumber();
     console.log(myNumberIs);
     textWait.innerHTML = 'Ready, waiting for server';
 

@@ -11,7 +11,6 @@ server.listen(3000, () => console.log('Example app listening on port 3000!'));
 //Static files
 app.use(express.static('public'));
 
-//Emit event
 const io = socketIO(server);
 io.on('connection', connectionIO);
 
@@ -24,6 +23,7 @@ setInterval(function(){
     var currentDate  = myModule.currentDate();
     var randomNumber = myModule.randomNumber(0,100);
     
+    //Emit event
     var toEmit = { myDate: currentDate, myNumber: randomNumber }
     io.sockets.emit('data', toEmit);
     
