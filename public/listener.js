@@ -1,14 +1,15 @@
-window.addEventListener('load',init);
+window.addEventListener('load', init);
 
 var socket = io.connect('http://localhost:3000');
+var tableRandom, tableRandomBody, textWait, myNumberIs;
 
-async function init(){
-    
-    var tableRandom = document.getElementById('tableRandom');
-    var tableRandomBody = document.querySelector('#tableRandom tbody');
-    var textWait = document.getElementById('wait');
+async function init() {
 
-    var myNumberIs = await setMyNumber();
+    tableRandom = document.getElementById('tableRandom');
+    tableRandomBody = document.querySelector('#tableRandom tbody');
+    textWait = document.getElementById('wait');
+
+    myNumberIs = await setMyNumber();
     console.log(myNumberIs);
     textWait.innerHTML = 'Ready, waiting for server';
 
